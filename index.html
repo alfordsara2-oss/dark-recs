@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dark Recommendations</title>
+<title>Dark Recs</title>
 
 <style>
+
 body{
-background:black;
+background:#0b0b0b;
 color:white;
 font-family:Arial;
 text-align:center;
+margin:0;
+}
+
+header{
+background:black;
+padding:20px;
+border-bottom:2px solid red;
 }
 
 h1{
@@ -16,51 +24,186 @@ color:red;
 }
 
 .section{
-margin:40px;
-padding:20px;
-border:1px solid red;
+margin:40px auto;
+padding:30px;
+max-width:600px;
+border:1px solid #333;
 border-radius:10px;
+background:#111;
 }
-</style>
 
+button{
+background:red;
+color:white;
+border:none;
+padding:12px 20px;
+margin-top:15px;
+font-size:16px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff3333;
+}
+
+.result{
+margin-top:20px;
+font-size:18px;
+color:#ff4444;
+}
+
+input{
+padding:10px;
+width:70%;
+margin-top:10px;
+border-radius:5px;
+border:none;
+}
+
+footer{
+margin-top:50px;
+padding:20px;
+background:black;
+color:#666;
+}
+
+</style>
 </head>
 
 <body>
 
+<header>
 <h1>Dark Recommendations</h1>
+<p>Metal • Horror • Paranormal</p>
+</header>
+
+<!-- METAL BAND GENERATOR -->
 
 <div class="section">
-<h2>Metal Bands</h2>
-<ul>
-<li>Sleep Token</li>
-<li>Ghost</li>
-<li>Spiritbox</li>
-<li>Deftones</li>
-<li>Lorna Shore</li>
-</ul>
+<h2>🤘 Metal Band Generator</h2>
+<button onclick="bandRec()">Recommend a Band</button>
+<div class="result" id="bandResult"></div>
 </div>
 
-<div class="section">
-<h2>Scary Movies</h2>
-<ul>
-<li>Hereditary</li>
-<li>The Witch</li>
-<li>Midsommar</li>
-<li>The Conjuring</li>
-<li>Sinister</li>
-</ul>
-</div>
+<!-- HORROR MOVIE GENERATOR -->
 
 <div class="section">
-<h2>Paranormal Stories</h2>
-<ul>
-<li>The Dybbuk Box</li>
-<li>The Skinwalker Ranch</li>
-<li>The Black Eyed Children</li>
-<li>The Amityville Horror</li>
-<li>The Bell Witch</li>
-</ul>
+<h2>🎬 Horror Movie Picker</h2>
+<button onclick="movieRec()">Pick a Horror Movie</button>
+<div class="result" id="movieResult"></div>
 </div>
+
+<!-- PARANORMAL STORY -->
+
+<div class="section">
+<h2>👻 Paranormal Story Generator</h2>
+<button onclick="storyRec()">Tell Me Something Creepy</button>
+<div class="result" id="storyResult"></div>
+</div>
+
+<!-- SEARCH -->
+
+<div class="section">
+<h2>🔎 Search Recommendations</h2>
+
+<input id="searchBox" placeholder="Search metal band or horror movie">
+
+<br>
+
+<button onclick="search()">Search</button>
+
+<div class="result" id="searchResult"></div>
+
+</div>
+
+<footer>
+<p>Dark Recs • Built with GitHub + Vercel</p>
+</footer>
+
+<script>
+
+const bands = [
+"Sleep Token",
+"Ghost",
+"Spiritbox",
+"Lorna Shore",
+"Deftones",
+"Gojira",
+"Bad Omens",
+"Bring Me The Horizon",
+"Behemoth",
+"Type O Negative"
+]
+
+const movies = [
+"Hereditary",
+"Midsommar",
+"The Witch",
+"The Conjuring",
+"Sinister",
+"The Babadook",
+"The Autopsy of Jane Doe",
+"The Descent",
+"It Follows",
+"The Lighthouse"
+]
+
+const stories = [
+"Skinwalker Ranch – A place full of UFO sightings and shapeshifters.",
+"The Dybbuk Box – Said to contain a trapped evil spirit.",
+"The Bell Witch – A haunting that tormented a Tennessee family.",
+"The Black Eyed Children – Strange kids asking to enter homes.",
+"The Amityville Haunting – One of the most famous haunted houses."
+]
+
+function bandRec(){
+
+let random = bands[Math.floor(Math.random()*bands.length)]
+
+document.getElementById("bandResult").innerText = random
+
+}
+
+function movieRec(){
+
+let random = movies[Math.floor(Math.random()*movies.length)]
+
+document.getElementById("movieResult").innerText = random
+
+}
+
+function storyRec(){
+
+let random = stories[Math.floor(Math.random()*stories.length)]
+
+document.getElementById("storyResult").innerText = random
+
+}
+
+function search(){
+
+let input = document.getElementById("searchBox").value.toLowerCase()
+
+let results = []
+
+bands.forEach(b=>{
+if(b.toLowerCase().includes(input)){results.push(b)}
+})
+
+movies.forEach(m=>{
+if(m.toLowerCase().includes(input)){results.push(m)}
+})
+
+if(results.length === 0){
+results = ["Nothing found in the darkness..."]
+}
+
+document.getElementById("searchResult").innerText = results.join(", ")
+
+}
+
+</script>
 
 </body>
 </html>
